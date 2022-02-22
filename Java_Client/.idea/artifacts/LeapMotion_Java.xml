@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="LeapMotion_Java">
+    <output-path>$PROJECT_DIR$/out/artifacts/LeapMotion_Java</output-path>
+    <root id="archive" name="LeapMotion_Java.jar">
+      <element id="module-output" name="LeapMotion_Java" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
