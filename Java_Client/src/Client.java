@@ -10,6 +10,7 @@ public class Client extends Thread{
     private Gson gson = new Gson();
     private int port;
     private Frame currentFrame;
+    private boolean close = false;
 
     public Client(int port) {
 
@@ -29,7 +30,7 @@ public class Client extends Thread{
         try{
             InputStreamReader inStreamReader = new InputStreamReader(in);
             BufferedReader reader= new BufferedReader(inStreamReader);
-            while(clientSocket.isConnected()) {
+            while(clientSocket.isConnected() && !close) {
                 String input = reader.readLine();
                 if(input != null){
                     currentFrame = gson.fromJson(input, Frame.class);
@@ -43,7 +44,9 @@ public class Client extends Thread{
 
     public void close() { // when exiting the program you MUST call close
         try{
+            close = true;
             clientSocket.close();
+
         }catch (Exception e){
 
         }

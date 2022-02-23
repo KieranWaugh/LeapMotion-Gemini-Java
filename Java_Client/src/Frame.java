@@ -62,7 +62,7 @@ public class Frame {
      * The member of the list that is farthest to the front within the standard Leap Motion frame of reference (i.e has the smallest Z coordinate).
      * @return The frontmost hand, or invalid if list is empty.
      */
-    public Hand Frontmost(){
+    public Hand getFrontmost(){
 
         if(Hands.size() == 1){
             return Hands.get(0);

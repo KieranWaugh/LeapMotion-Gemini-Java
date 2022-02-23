@@ -41,17 +41,20 @@ public class Server : MonoBehaviour
         {
             connected_Text.text = "Connected";
             connected_Text.color = Color.green;
+            info_Text.text = "You can now minimise this window.";
+            info_Text.color = Color.red;
 
             try
             {
                 Frame frame = controller.Frame();
+               
                 long timestamp = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                 frame.Timestamp = timestamp;
                 if (frame.Id != prevID)
                 {
                     string output = JsonUtility.ToJson(frame);
                     output.Insert(output.Length, "\n");
-                    //Debug.Log(frame.ToString());
+                    //Debug.Log(frame.Hands[0].StabilizedPalmPosition);
                     prevID = frame.Id;
                     //Debug.Log(frame.Id);
                     send(output);
@@ -85,7 +88,7 @@ public class Server : MonoBehaviour
             tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 6666);
             tcpListener.Start();
             connected = true;
-            Debug.Log("Server is listening");
+            //Debug.Log("Server is listening");
 
             Byte[] bytes = new Byte[1024];
             while (true)
@@ -116,6 +119,7 @@ public class Server : MonoBehaviour
 
             info_Text.text = e.Message;
             info_Text.color = Color.red;
+            Debug.Log(e.Message);
         }
     }
 
@@ -134,7 +138,7 @@ public class Server : MonoBehaviour
             if (stream.CanWrite)
             {
                 writer.WriteLine(json);
-                //Debug.Log("Sent");
+                //Debug.Log(json);
                 writer.Flush();
 
             }
@@ -143,6 +147,7 @@ public class Server : MonoBehaviour
         {
             info_Text.text = e.Message;
             info_Text.color = Color.red;
+            Debug.Log(e.Message);
         }
     }
 
